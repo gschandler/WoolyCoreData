@@ -8,6 +8,8 @@ Best if used in conjunction with WoolyFoundation and WoolyUIKit, but neither are
 This is definitely "work in progress", has minimal documentation, and could be considered
 quite sparse.
 
+Please note that none of the category method signatures have been prefixed, so it is possible for a future naming collision if Apple should choose to implement a similar method in UIKit. I will fix this at some point.
+
 Installation
 ------------
 1. Add WoolyCoreData.xcodeproj to your current project.
