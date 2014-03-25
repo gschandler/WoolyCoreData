@@ -28,12 +28,6 @@
 
 @interface NSManagedObjectContext (WoolyCoreData)
 
-- (NSArray *)fetchObjectsForEntityName:(NSString *)name withPredicate:(NSPredicate *)predicate andSortDescriptors:(NSArray *)sortDescriptors;
-- (NSInteger)objectCountForEntityName:(NSString *)name withPredicate:(NSPredicate *)predicate;
-
-
 - (NSManagedObject *)objectWithURI:(NSURL *)uri;
 
-// retrieve NSManagedObject from this context that was loaded in (presumably) on another context. Extremely convenient for cross-thread contexts.
-- (NSManagedObject *)objectWithinManagedObjectContextForObject:(NSManagedObject *)object;
 @end

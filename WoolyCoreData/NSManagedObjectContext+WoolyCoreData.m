@@ -25,67 +25,9 @@
 //
 
 #import "NSManagedObjectContext+WoolyCoreData.h"
+#import "WoolyCoreDataErrorReporting.h"
 
 @implementation NSManagedObjectContext (WoolyCoreData)
-/*
- *
- *
- *
- */
-- (NSArray *)fetchObjectsForEntityName:(NSString *)name withPredicate:(NSPredicate *)predicate andSortDescriptors:(NSArray *)sortDescriptors
-{
-	NSParameterAssert(name);
-	NSArray *entities = [NSArray array];
-	if ( name ) {
-		NSFetchRequest *request = [NSFetchRequest new];
-		[request setEntity:[NSEntityDescription entityForName:name inManagedObjectContext:self]];
-		if ( predicate ) {
-			[request setPredicate:predicate];
-		}
-		if ( sortDescriptors ) {
-			[request setSortDescriptors:sortDescriptors];
-		}
-		
-		NSError *error = nil;
-		entities = [self executeFetchRequest:request error:&error];
-#if !__has_feature(objc_arc)
-		[request release];
-#endif
-		
-		if ( entities== nil) {
-			NSLog(@"Error fetching records for entity \"%@\".\nError details: %@",name,error);
-		}
-	}
-	
-	return entities;
-}
-
-/*
- *
- *
- *
- */
-- (NSInteger)objectCountForEntityName:(NSString *)name withPredicate:(NSPredicate *)predicate
-{
-	NSParameterAssert(name);
-
-	NSInteger count = 0;
-	if ( name ) {
-		NSFetchRequest *request = [NSFetchRequest new];
-		[request setEntity:[NSEntityDescription entityForName:name inManagedObjectContext:self]];
-		if ( predicate ) {
-			[request setPredicate:predicate];
-		}
-		
-		NSError *error = nil;
-		count = [self countForFetchRequest:request error:&error];
-#if !__has_feature(objc_arc)
-		[request release];
-#endif
-	}
-	
-	return count;
-}
 
 /*
  *
@@ -102,25 +44,9 @@
         NSError *error = nil;
         object = [self existingObjectWithID:objectID error:&error];
         if ( object == nil ) {
-            NSLog(@"Error fetching object from URI: %@",error);
+			WoolyCoreDataErrorReporting(_cmd, error);
         }
     }
     return object;
 }
-
-/*
- *
- *
- *
- */
-- (NSManagedObject *)objectWithinManagedObjectContextForObject:(NSManagedObject *)object
-{
-	NSManagedObject *newObject = object;
-	if ( object && self != object.managedObjectContext ) {
-		NSManagedObjectID *objectID = [object objectID];
-		newObject = [self objectWithID:objectID];
-	}
-	return newObject;
-}
-
 @end

@@ -25,7 +25,7 @@
 //
 
 #import "NSManagedObject+WoolyCoreData.h"
-
+#import "WoolyCoreDataErrorReporting.h"
 
 @implementation NSManagedObject(WoolyCoreData)
 
@@ -42,9 +42,7 @@
 	NSFetchRequest *request = [NSFetchRequest new];
 	NSString *entityName = NSStringFromClass([self class]);
 	[request setEntity:[NSEntityDescription entityForName:entityName inManagedObjectContext:context]];
-#if !__has_feature(objc_arc)
-	[request autorelease];
-#endif
+	WBAutorelease(request);
 	return request;
 }
 
@@ -73,6 +71,74 @@
 	NSManagedObjectID *obj1ID = [self objectID];
 	NSManagedObjectID *obj2ID = [other objectID];
 	return [obj1ID isEqual:obj2ID];
+}
+
++ (NSArray *)fetchItemsInManagedObjectContext:(NSManagedObjectContext *)context
+{
+	return [self fetchItemsUsingPredicate:nil sortedWith:nil inManagedObjectContext:context];
+}
+
++ (NSArray *)fetchItemsUsingPredicate:(NSPredicate *)predicate inManagedObjectContext:(NSManagedObjectContext *)context
+{
+	return [self fetchItemsUsingPredicate:predicate sortedWith:nil inManagedObjectContext:context];
+	
+}
+
++ (NSArray *)fetchItemsUsingPredicate:(NSPredicate *)predicate sortedWith:(NSArray *)sortDescriptors inManagedObjectContext:(NSManagedObjectContext *)context
+{
+	NSParameterAssert(context);
+	if ( !context ) return nil;
+	
+	NSFetchRequest *request = [self fetchRequestInManagedObjectContext:context];
+	if ( predicate ) {
+		[request setPredicate:predicate];
+	}
+	
+	if ( sortDescriptors ) {
+		[request setSortDescriptors:sortDescriptors];
+	}
+	
+	NSError *error = nil;
+	NSArray *results = [context executeFetchRequest:request error:&error];
+	if ( !results && error ) {
+		WoolyCoreDataErrorReporting(_cmd,error);
+	}
+	return results;
+	
+}
+
++ (NSInteger)countOfItemsInManagedObjectContext:(NSManagedObjectContext *)context
+{
+	return [self countOfItemsUsingPredicate:nil inManagedObjectContext:context];
+}
+
++ (NSInteger)countOfItemsUsingPredicate:(NSPredicate *)predicate inManagedObjectContext:(NSManagedObjectContext *)context
+{
+	NSParameterAssert(context);
+	if ( !context ) return NSNotFound;
+	
+	NSFetchRequest *request = [self fetchRequestInManagedObjectContext:context];
+	
+	if ( predicate ) {
+		[request setPredicate:predicate];
+	}
+	
+	NSError *error = nil;
+	NSInteger count = [context countForFetchRequest:request error:&error];
+	if ( count == NSNotFound && error ) {
+		WoolyCoreDataErrorReporting(_cmd,error);
+	}
+	return count;
+}
+
+- (NSManagedObject *)objectInManagedObjectContext:(NSManagedObjectContext *)context
+{
+	NSManagedObject *newObject = self;
+	if ( self && context != self.managedObjectContext ) {
+		NSManagedObjectID *objectID = [self objectID];
+		newObject = [context objectWithID:objectID];
+	}
+	return newObject;
 }
 
 @end

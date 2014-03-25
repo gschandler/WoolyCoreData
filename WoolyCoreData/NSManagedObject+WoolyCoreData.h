@@ -32,4 +32,19 @@
 + (NSManagedObject *)createInManagedObjectContext:(NSManagedObjectContext *)context;
 
 - (BOOL)isEqualToManagedObject:(NSManagedObject *)other;
+
++ (NSArray *)fetchItemsInManagedObjectContext:(NSManagedObjectContext *)context;
++ (NSArray *)fetchItemsUsingPredicate:(NSPredicate *)predicate inManagedObjectContext:(NSManagedObjectContext *)context;
++ (NSArray *)fetchItemsUsingPredicate:(NSPredicate *)predicate sortedWith:(NSArray *)sortDescriptors inManagedObjectContext:(NSManagedObjectContext *)context;
+
++ (NSInteger)countOfItemsInManagedObjectContext:(NSManagedObjectContext *)context;
++ (NSInteger)countOfItemsUsingPredicate:(NSPredicate *)predicate inManagedObjectContext:(NSManagedObjectContext *)context;
+
+/**
+ Retieve object equivalent to reciever on a different context for cross-thread situations
+ 
+ @param NSManagedObjectContext
+ @return NSManagedObject
+ */
+- (NSManagedObject *)objectInManagedObjectContext:(NSManagedObjectContext *)context;
 @end

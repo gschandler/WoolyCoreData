@@ -13,6 +13,7 @@
 		4CBA6DF3132409E50052CED7 /* WoolyCoreData.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CBA6DF2132409E50052CED7 /* WoolyCoreData.h */; };
 		4CFB7CE6152E2785000573C6 /* NSManagedObjectContext+WoolyCoreData.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CFB7CE4152E2785000573C6 /* NSManagedObjectContext+WoolyCoreData.h */; };
 		4CFB7CE7152E2785000573C6 /* NSManagedObjectContext+WoolyCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFB7CE5152E2785000573C6 /* NSManagedObjectContext+WoolyCoreData.m */; };
+		4CFC80D318DF54D200C538AA /* WoolyCoreDataErrorReporting.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFC80D218DF54D200C538AA /* WoolyCoreDataErrorReporting.m */; };
 		AA747D9F0F9514B9006C5449 /* WoolyCoreData_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* WoolyCoreData_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -24,6 +25,8 @@
 		4CBA6DF2132409E50052CED7 /* WoolyCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WoolyCoreData.h; path = WoolyCoreData/WoolyCoreData.h; sourceTree = "<group>"; };
 		4CFB7CE4152E2785000573C6 /* NSManagedObjectContext+WoolyCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectContext+WoolyCoreData.h"; path = "WoolyCoreData/NSManagedObjectContext+WoolyCoreData.h"; sourceTree = "<group>"; };
 		4CFB7CE5152E2785000573C6 /* NSManagedObjectContext+WoolyCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+WoolyCoreData.m"; path = "WoolyCoreData/NSManagedObjectContext+WoolyCoreData.m"; sourceTree = "<group>"; };
+		4CFC80D218DF54D200C538AA /* WoolyCoreDataErrorReporting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WoolyCoreDataErrorReporting.m; path = WoolyCoreData/WoolyCoreDataErrorReporting.m; sourceTree = "<group>"; };
+		4CFC80D418DF54ED00C538AA /* WoolyCoreDataErrorReporting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WoolyCoreDataErrorReporting.h; path = WoolyCoreData/WoolyCoreDataErrorReporting.h; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* WoolyCoreData_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WoolyCoreData_Prefix.pch; path = WoolyCoreData/WoolyCoreData_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libWoolyCoreData.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWoolyCoreData.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +89,8 @@
 			children = (
 				AA747D9E0F9514B9006C5449 /* WoolyCoreData_Prefix.pch */,
 				4CBA6DF2132409E50052CED7 /* WoolyCoreData.h */,
+				4CFC80D218DF54D200C538AA /* WoolyCoreDataErrorReporting.m */,
+				4CFC80D418DF54ED00C538AA /* WoolyCoreDataErrorReporting.h */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -159,6 +164,7 @@
 			files = (
 				4CBA6DF1132409CA0052CED7 /* NSManagedObject+WoolyCoreData.m in Sources */,
 				4CFB7CE7152E2785000573C6 /* NSManagedObjectContext+WoolyCoreData.m in Sources */,
+				4CFC80D318DF54D200C538AA /* WoolyCoreDataErrorReporting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
